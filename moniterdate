@@ -1,0 +1,93 @@
+mon=$(date "+%m")
+case $mon in
+01)
+        logmon=$(echo "Jan");;
+02)
+        logmon=$(echo "Feb");;
+03)
+        logmon=$(echo "Mar");;
+04)
+        logmon=$(echo "Apr");;
+05)
+        logmon=$(echo "May");;
+06)
+        logmon=$(echo "Jun");;
+07)
+        logmon=$(echo "Jul");;
+08)
+        logmon=$(echo "Aug");;
+09)
+        logmon=$(echo "Sep");;
+10)
+        logmon=$(echo "Oct");;
+11)
+        logmon=$(echo "Nov");;
+12)
+        logmon=$(echo "Dec");;
+        esac
+day=$(date "+%d")
+case $day in
+01)
+        logday=$(echo " 1");;
+02)
+        logday=$(echo " 2");;
+03)
+        logday=$(echo " 3");;
+04)
+        logday=$(echo " 4");;
+05)
+        logday=$(echo " 5");;
+06)
+        logday=$(echo " 6");;
+07)
+        logday=$(echo " 7");;
+08)
+        logday=$(echo " 8");;
+09)
+        logday=$(echo " 9");;
+10)
+        logday=$(echo "10");;
+11)
+        logday=$(echo "11");;
+12)
+        logday=$(echo "12");;
+13)
+        logday=$(echo "13");;
+14)
+        logday=$(echo "14");;
+15)
+        logday=$(echo "15");;
+16)
+        logday=$(echo "16");;
+17)
+        logday=$(echo "17");;
+18)
+        logday=$(echo "18");;
+19)
+        logday=$(echo "19");;
+20)
+        logday=$(echo "20");;
+21)
+        logday=$(echo "21");;
+22)
+        logday=$(echo "22");;
+23)
+        logday=$(echo "23");;
+24)
+        logday=$(echo "24");;
+25)
+        logday=$(echo "25");;
+26)
+        logday=$(echo "26");;
+27)
+        logday=$(echo "27");;
+28)
+        logday=$(echo "28");;
+29)
+        logday=$(echo "29");;
+30)
+        logday=$(echo "30");;
+31)
+        logday=$(echo "31");;
+        esac
+echo "$(echo $logmon) $(echo "$logday") $(date "+%H:%M")"

@@ -1,0 +1,20 @@
+#!/bin/bash
+cd /
+hostsdate=$(date '+%Y%m%d')
+FILE=/git/hosts/hosts$hostsdate
+hdate=$(/usr/script/moniterdate |awk '{ print $1 }')$(echo " ")$(/usr/script/moniterdate |awk '{ print $2 }')
+curl  --connect-timeout 10 "https://github.com/racaljk/hosts"|grep -q "$hdate" 
+if [ $? -eq 0 ]; 
+then
+	wget https://raw.githubusercontent.com/racaljk/hosts/master/hosts -O $FILE
+	cp $FILE /etc/hosts-google
+	sed '/video/d' /etc/hosts-google|sed '/youtube/d'|sed '/#/d'|sed '/panoramio/d'>/etc/hosts-dnsmasq
+	service dnsmasq restart
+	cd /git/hosts/
+	git add $FILE
+	uptime=$(date '+%Y%m%d%H%M')
+	git commit -m "$uptime"
+	git push
+else
+	echo "No more newer hosts!"
+fi
