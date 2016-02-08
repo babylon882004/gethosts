@@ -1,20 +1,26 @@
 #!/bin/bash
-cd /
+cd /git/hosts/
 hostsdate=$(date '+%Y%m%d')
 FILE=/git/hosts/hosts$hostsdate
 hdate=$(/usr/script/moniterdate |awk '{ print $1 }')$(echo " ")$(/usr/script/moniterdate |awk '{ print $2 }')
-curl  --connect-timeout 10 "https://github.com/racaljk/hosts"|grep -q "$hdate" 
-if [ $? -eq 0 ]; 
+if [ ! -f $FILE ];
 then
-	wget https://raw.githubusercontent.com/racaljk/hosts/master/hosts -O $FILE
-	cp $FILE /etc/hosts-google
-	sed '/video/d' /etc/hosts-google|sed '/youtube/d'|sed '/#/d'|sed '/panoramio/d'>/etc/hosts-dnsmasq
-	service dnsmasq restart
-	cd /git/hosts/
-	git add $FILE
-	uptime=$(date '+%Y%m%d%H%M')
-	git commit -m "$uptime"
-	git push
-else
+	curl  --connect-timeout 10 "https://github.com/racaljk/hosts"|grep -q "$hdate" 
+	if [ $? -eq 0 ]; 
+	then
+		wget https://raw.githubusercontent.com/racaljk/hosts/master/hosts -O $FILE
+		cp $FILE /etc/hosts-google
+		sed '/video/d' /etc/hosts-google|sed '/youtube/d'|sed '/#/d'|sed '/panoramio/d'|sed '/facebook/d'|sed '/fbcdn/d'|sed '/tfbnw/d'|sed '/thefacebook/d'|sed '/fbsbx/d'|sed '/fbexternal/d'|sed '/fbstatic-a/d'>/etc/hosts-dnsmasq
+		service dnsmasq restart
+		cd /git/hosts/
+		git add $FILE
+		uptime=$(date '+%Y%m%d%H%M')
+		git commit -m "$uptime"
+		ssh  -o "StrictHostKeyChecking no" -T git@github.com
+		git push
+	else
 	echo "No more newer hosts!"
+	fi
+else
+	echo "The hosts was the newest!"
 fi
