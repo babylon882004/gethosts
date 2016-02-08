@@ -19,7 +19,7 @@ then
 		ssh  -o "StrictHostKeyChecking no" -T git@github.com
 		git push
 	else
-	echo "No more newer hosts!"
+		echo "No more newer hosts!"
 	fi
 else
 	echo "The hosts was the newest!"
